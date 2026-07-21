@@ -8,7 +8,7 @@
 -- - 'error' selectivity on comments.text: ~1%
 
 -- Postgres default plan (custom scan off)
-SET paradedb.enable_join_custom_scan TO off; WITH comment_hits AS (
+SET work_mem TO '4GB'; SET paradedb.enable_join_custom_scan TO off; WITH comment_hits AS (
     SELECT post_id, SUM(pdb.score(id)) AS comment_score
     FROM comments
     WHERE text ||| 'error'

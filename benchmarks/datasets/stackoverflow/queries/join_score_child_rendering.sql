@@ -8,7 +8,7 @@
 -- - 'error' selectivity on comments.text: ~1%
 
 -- Postgres default plan (custom scan off)
-SET paradedb.enable_join_custom_scan TO off; SELECT 
+SET work_mem TO '4GB'; SET paradedb.enable_join_custom_scan TO off; SELECT 
     c.id AS comment_id,
     c.text,
     COALESCE(pdb.score(c.id), 0.0) + COALESCE(pdb.score(p.id), 0.0) AS total_score
